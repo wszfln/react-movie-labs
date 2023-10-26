@@ -40,3 +40,14 @@ export const getMovies = () => {
         return json.results;
       });
   };
+
+  export const getUpcomingMovies = () => {
+    return fetch(
+      `https://api.themoviedb.org/3/movie/upcoming?api_key=62e9b1532f93f28c70bdb47f5ad15a3f&language=en-US&page=1`
+    )
+    .then((res) => res.json())
+    .then((json) => {
+      // console.log(json.results);
+      return json.results;
+    });
+  };
