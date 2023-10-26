@@ -55,6 +55,22 @@ describe("Filtering", () => {
       });
   });
   describe("Combined genre and title", () => {
-    // TODO
+    it("only display movies that match both title and genre criteria", () => {
+        const searchString = "e"; 
+        const selectedGenreId = 18; 
+        const selectedGenreText = "Drama";
+        const matchingMovies = filterByTitle(movies, searchString).filter(
+          (movie) => filterByGenre([movie], selectedGenreId).length > 0
+        );
+    
+        cy.get("#filled-search").clear().type(searchString);
+        cy.get("#genre-select").click();
+        cy.get("li").contains(selectedGenreText).click();
+    
+        cy.get(".MuiCardHeader-content").should("have.length", matchingMovies.length);
+        cy.get(".MuiCardHeader-content").each(($card, index) => {
+          cy.wrap($card).find("p").contains(matchingMovies[index].title);
+        });
+      });
   });
 });
