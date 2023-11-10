@@ -8,6 +8,7 @@ import AddToPlayListIcon from '../components/cardIcons/addToPlayList'
 
 const UpcomingMoviesPage = (props) => {
   const {  data, error, isLoading, isError }  = useQuery('upcoming', getUpcomingMovies)
+  //already changed
 
   if (isLoading) {
     return <Spinner />
