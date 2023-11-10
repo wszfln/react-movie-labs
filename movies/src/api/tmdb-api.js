@@ -10,7 +10,7 @@ export const getMovies = () => {
   .catch((error) => {
      throw error
   });
-};;
+};
   
 export const getMovie = (args) => {
   // console.log(args)
@@ -76,10 +76,13 @@ export const getMovie = (args) => {
   export const getUpcomingMovies = () => {
     return fetch(
       `https://api.themoviedb.org/3/movie/upcoming?api_key=62e9b1532f93f28c70bdb47f5ad15a3f&language=en-US&page=1`
-    )
-    .then((res) => res.json())
-    .then((json) => {
-      // console.log(json.results);
-      return json.results;
+    ).then((response) => {
+      if (!response.ok) {
+        throw new Error(response.json().message);
+      }
+      return response.json();
+    })
+    .catch((error) => {
+       throw error
     });
   };
